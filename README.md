@@ -1,26 +1,33 @@
-# Module Blueprint
+# WS Elastic Container Service (ECS) Terraform module
 
-Terraform module blueprint
+Terraform module which creates ECS resources on AWS.
+
+This module focuses purely on ECS and nothing else. Therefore only these resources can be created with this module:
+
+- [ECS](https://www.terraform.io/docs/providers/aws/r/ecs_cluster.html)
+- [IAM](https://www.terraform.io/docs/providers/aws/r/iam_instance_profile.html)
+
+However, having said the above to have a proper ECS cluster up and running multiple resources are needed. In most cases creating these resources is heavily opinionated and or context-bound. That is why this module does not create these resources. But you still need them to have a production ready environment. Therefore the example area shows how to create everything needed for a production environment.
 
 ---
 
-![](https://github.com/terraform-module/terraform-module-blueprint/workflows/release/badge.svg)
-![](https://github.com/terraform-module/terraform-module-blueprint/workflows/commit-check/badge.svg)
-![](https://github.com/terraform-module/terraform-module-blueprint/workflows/labeler/badge.svg)
+![](https://github.com/terraform-module/terraform-aws-ecs/workflows/release/badge.svg)
+![](https://github.com/terraform-module/terraform-aws-ecs/workflows/commit-check/badge.svg)
+![](https://github.com/terraform-module/terraform-aws-ecs/workflows/labeler/badge.svg)
 
-[![](https://img.shields.io/github/license/terraform-module/terraform-module-blueprint)](https://github.com/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/v/tag/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/issues/github/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/issues/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/issues-closed/terraform-module/terraform-module-blueprint)
-[![](https://img.shields.io/github/languages/code-size/terraform-module/terraform-module-blueprint)](https://github.com/terraform-module/terraform-module-blueprint)
-[![](https://img.shields.io/github/repo-size/terraform-module/terraform-module-blueprint)](https://github.com/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/languages/top/terraform-module/terraform-module-blueprint?color=green&logo=terraform&logoColor=blue)
-![](https://img.shields.io/github/commit-activity/m/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/contributors/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/last-commit/terraform-module/terraform-module-blueprint)
-[![Maintenance](https://img.shields.io/badge/Maintenu%3F-oui-green.svg)](https://GitHub.com/terraform-module/terraform-module-blueprint/graphs/commit-activity)
-[![GitHub forks](https://img.shields.io/github/forks/terraform-module/terraform-module-blueprint.svg?style=social&label=Fork)](https://github.com/terraform-module/terraform-module-blueprint)
+[![](https://img.shields.io/github/license/terraform-module/terraform-aws-ecs)](https://github.com/terraform-module/terraform-aws-ecs)
+![](https://img.shields.io/github/v/tag/terraform-module/terraform-aws-ecs)
+![](https://img.shields.io/issues/github/terraform-module/terraform-aws-ecs)
+![](https://img.shields.io/github/issues/terraform-module/terraform-aws-ecs)
+![](https://img.shields.io/github/issues-closed/terraform-module/terraform-aws-ecs)
+[![](https://img.shields.io/github/languages/code-size/terraform-module/terraform-aws-ecs)](https://github.com/terraform-module/terraform-aws-ecs)
+[![](https://img.shields.io/github/repo-size/terraform-module/terraform-aws-ecs)](https://github.com/terraform-module/terraform-aws-ecs)
+![](https://img.shields.io/github/languages/top/terraform-module/terraform-aws-ecs?color=green&logo=terraform&logoColor=blue)
+![](https://img.shields.io/github/commit-activity/m/terraform-module/terraform-aws-ecs)
+![](https://img.shields.io/github/contributors/terraform-module/terraform-aws-ecs)
+![](https://img.shields.io/github/last-commit/terraform-module/terraform-aws-ecs)
+[![Maintenance](https://img.shields.io/badge/Maintenu%3F-oui-green.svg)](https://GitHub.com/terraform-module/terraform-aws-ecs/graphs/commit-activity)
+[![GitHub forks](https://img.shields.io/github/forks/terraform-module/terraform-aws-ecs.svg?style=social&label=Fork)](https://github.com/terraform-module/terraform-aws-ecs)
 
 ---
 
@@ -30,16 +37,35 @@ Terraform module blueprint
 
 ## Usage example
 
-IMPORTANT: The master branch is used in source just as an example. In your code, do not pin to master because there may be breaking changes between releases. Instead pin to the release tag (e.g. ?ref=tags/x.y.z) of one of our [latest releases](https://github.com/terraform-module/terraform-module-blueprint/releases).
-
-See `examples` directory for working examples to reference:
+IMPORTANT: The master branch is used in source just as an example. In your code, do not pin to master because there may be breaking changes between releases. Instead pin to the release tag (e.g. ?ref=tags/x.y.z) of one of our [latest releases](https://github.com/terraform-module/terraform-aws-ecs/releases).
 
 ```hcl
-module "blueprint" {
-  source  = "terraform-module/blueprint"
-  version = "0.0.0"
+module "ecs" {
+  source = "terraform-aws-modules/ecs/aws"
+
+  name = "my-ecs"
+
+  container_insights = true
+
+  capacity_providers = ["FARGATE", "FARGATE_SPOT"]
+
+  default_capacity_provider_strategy = [
+    {
+      capacity_provider = "FARGATE_SPOT"
+    }
+  ]
+
+  tags = {
+    Environment = "Development"
+  }
 }
 ```
+
+## Examples
+
+See `examples` directory for working examples to reference
+
+- [Complete ECS](https://github.com/terraform-module/terraform-aws-ecs/tree/master/examples/complete-ecs)
 
 ## Assumptions
 
@@ -97,13 +123,13 @@ Submit a pull request
 
 # Authors
 
-Currently maintained by [Ivan Katliarchuk](https://github.com/ivankatliarchuk) and these [awesome contributors](https://github.com/terraform-module/terraform-module-blueprint/graphs/contributors).
+Currently maintained by [Ivan Katliarchuk](https://github.com/ivankatliarchuk) and these [awesome contributors](https://github.com/terraform-module/terraform-aws-ecs/graphs/contributors).
 
 [![ForTheBadge uses-git](http://ForTheBadge.com/images/badges/uses-git.svg)](https://GitHub.com/)
 
 ## Terraform Registry
 
-- [Module](https://registry.terraform.io/modules/terraform-module/todo/aws)
+- [Module](https://registry.terraform.io/modules/terraform-module/ecs/aws)
 
 ## Resources
 
@@ -114,4 +140,4 @@ Currently maintained by [Ivan Katliarchuk](https://github.com/ivankatliarchuk) a
 [**Create a repository using this template →**][template.generate]
 
 <!-- resources -->
-[template.generate]: https://github.com/terraform-module/terraform-module-blueprint/generate
+[template.generate]: https://github.com/terraform-module/terraform-aws-ecs/generate
