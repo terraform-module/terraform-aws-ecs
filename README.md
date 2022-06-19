@@ -9,6 +9,8 @@ This module focuses purely on ECS and nothing else. Therefore only these resourc
 
 However, having said the above to have a proper ECS cluster up and running multiple resources are needed. In most cases creating these resources is heavily opinionated and or context-bound. That is why this module does not create these resources. But you still need them to have a production ready environment. Therefore the example area shows how to create everything needed for a production environment.
 
+Reasoining. Due to fact, that [base mobule](https://github.com/terraform-aws-modules/terraform-aws-ecs/tree/v3.5.0) was rewrited due, seems a bit clunky and it does solve some owner specific issue.
+
 ---
 
 ![](https://github.com/terraform-module/terraform-aws-ecs/workflows/release/badge.svg)
