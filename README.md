@@ -67,7 +67,7 @@ module "ecs" {
 
 See `examples` directory for working examples to reference
 
-- [Complete ECS](https://github.com/terraform-module/terraform-aws-ecs/tree/master/examples/complete-ecs)
+- [Complete ECS](https://github.com/terraform-module/terraform-aws-ecs/tree/master/examples)
 
 ## Assumptions
 
