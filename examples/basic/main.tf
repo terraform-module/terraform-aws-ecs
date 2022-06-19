@@ -2,7 +2,8 @@
 # Resources
 ################################################################################
 module "ecs" {
-  source = "terraform-aws-module/ecs/aws"
+  source  = "terraform-aws-module/ecs/aws"
+  version = "~> 1"
 
   name = "test-ecs"
 
@@ -18,6 +19,7 @@ module "ecs" {
   tags = {
     Created = "Teeraform"
     Owner   = "DevOps"
+    Module  = "terraform-module/ecs/aws"
   }
 }
 
@@ -27,4 +29,3 @@ module "ecs" {
 output "ecs" {
   value = { for k, v in module.ecs : k => v }
 }
-

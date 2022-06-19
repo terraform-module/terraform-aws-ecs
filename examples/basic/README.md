@@ -27,7 +27,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecs"></a> [ecs](#module\_ecs) | terraform-aws-module/ecs/aws | n/a |
+| <a name="module_ecs"></a> [ecs](#module\_ecs) | terraform-aws-module/ecs/aws | ~> 1 |
 
 ## Resources
 
