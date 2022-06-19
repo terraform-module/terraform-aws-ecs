@@ -43,7 +43,7 @@ IMPORTANT: The master branch is used in source just as an example. In your code,
 
 ```hcl
 module "ecs" {
-  source = "terraform-aws-modules/ecs/aws"
+  source = "terraform-aws-module/ecs/aws"
 
   name = "my-ecs"
 
@@ -117,7 +117,6 @@ No modules.
 | <a name="output_ecs_cluster_id"></a> [ecs\_cluster\_id](#output\_ecs\_cluster\_id) | ID of the ECS Cluster |
 | <a name="output_ecs_cluster_name"></a> [ecs\_cluster\_name](#output\_ecs\_cluster\_name) | The name of the ECS cluster |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 
 ### :memo: Guidelines
 
